@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { FaShoppingCart, FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from 'react-icons/fa'
+import CartDropdown from './CartDropdown'
 import { IoMdMail } from 'react-icons/io'
 import { Link, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
@@ -112,11 +113,7 @@ export default function Navbar() {
                         {isOpen ? 'Close' : 'Menu'}
                       </span>
                     )}
-                    <div className={`rounded-full p-2 cursor-pointer 
-                    hover:bg-(--orange)/80 hover:text-(--white) transition-all duration-300
-                    ${isWhiteHeader ? 'bg-(--orange) text-(--white)' : 'bg-(--white) text-(--orange)'}`}>
-                        <FaShoppingCart className='size-5 '/>
-                    </div>
+                    <CartDropdown isWhiteHeader={isWhiteHeader} />
                   </div>
               </div>
           </div>

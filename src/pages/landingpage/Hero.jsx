@@ -38,7 +38,8 @@ export default function Hero() {
                     <p className='md:w-sm w-full text-center md:text-right text-(--offWhite)'>Inspired by the kind of flavor that makes a simple meal unforgettable,</p>
                 </div>
                 <div className='flex items-center justify-center md:items-end md:justify-end'>
-                    <CTAButton label='Order Now'/>
+                    <CTAButton label='Order Now'
+                    link={'/product/1'}/>
                 </div>
             </div>
         </div>
@@ -56,8 +57,8 @@ export default function Hero() {
                     flex items-center justify-center'>
                 <div className='flex flex-col items-center -rotate-15'>
                     <span className='block text-center text-(--secondary_orange)'>Rs.</span>
-                    <span className='block text-center text-2xl font-bold text-(--secondary_orange)'>499/-</span>
-                    <span className='block text-center text-(--secondary_orange)'>400gm</span>
+                    <span className='block text-center text-2xl font-bold text-(--secondary_orange)'>650/-</span>
+                    <span className='block text-center text-(--secondary_orange)'>500gm</span>
                 </div>
             </div>
         </div>

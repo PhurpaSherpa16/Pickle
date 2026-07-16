@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { productsData } from '../../data/products'
-import { FaStar, FaShoppingCart, FaEye, FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { FaStar, FaShoppingCart, FaEye, FaArrowLeft, FaArrowRight, FaCheck } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'motion/react'
 import { Link, useLocation } from 'react-router-dom';
+import { FaCartShopping } from 'react-icons/fa6';
+import { useCart } from '../../context/CartContext';
 
 export default function Products() {
   const location = useLocation();
@@ -51,6 +53,7 @@ export default function Products() {
                             transition={{ duration: 0.3 }}
                         >
                             <ProductCard 
+                                product={product}
                                 pid = {product.id}
                                 src={product.images ? product.images[0] : '/radish.png'} 
                                 name={product.name} 
@@ -70,7 +73,11 @@ export default function Products() {
   )
 }
 
-export const ProductCard = ({src, name, category, price, weight, rating, type, flavor, pid}) => {
+export const ProductCard = ({src, name, category, price, weight, rating, type, flavor, pid, product}) => {
+    const { addToCart } = useCart()
+    const [addedFeedback, setAddedFeedback] = useState(false)
+    const quantity = 1
+    
     return(
         <div className='group relative bg-(--white) border border-(--orange)/10 rounded-2xl flex p-4 space-y-2
         flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-out cursor-pointer h-full'>
@@ -133,10 +140,26 @@ export const ProductCard = ({src, name, category, price, weight, rating, type, f
                         </p>
                     </div>
 
-                    <Link to={`/product/${pid}`} className='w-full bg-(--orange) cursor-pointer hover:bg-(--dark_orange) text-white! py-2.5 px-4 rounded-xl transition-colors duration-300 text-sm flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-lg'>
-                        <span>View Product</span>
-                        <FaArrowRight className='-rotate-45'/>
-                    </Link>
+                    <div className='flex items-center justify-center gap-4'>
+                        <Link to={`/product/${pid}`} className='w-full bg-(--orange) cursor-pointer hover:bg-(--dark_orange) text-white! 
+                        py-2.5 px-4 rounded-lg transition-colors duration-300 text-sm flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-lg'>
+                            <span>View Product</span>
+                            <FaArrowRight className='-rotate-45'/>
+                        </Link>
+                        <button onClick={() => {
+                            addToCart(product, 1)
+                            setAddedFeedback(true)
+                            setTimeout(() => setAddedFeedback(false), 1500)
+                        }} 
+                        className={`w-fit ${addedFeedback ? 'bg-(--light_green) hover:bg-(--light_green)' : 'bg-(--orange) hover:bg-(--dark_orange) ' } cursor-pointer text-white!
+                        p-2.5 rounded-full transition-colors duration-300 text-sm flex items-center justify-center 
+                        gap-2 group/btn shadow-md hover:shadow-lg`}>
+                            {addedFeedback ? 
+                            <span> <FaCheck className='size-5 pointer-events-none text-green-600'/></span> :
+                            <FaCartShopping className='size-5 pointer-events-none'/>
+                            }
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

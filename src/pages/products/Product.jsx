@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom'
 import { productsData } from '../../data/products'
 import { ProductCard } from './Products'
 import { FaStar, FaFire, FaArrowRight, FaMinus, FaPlus, FaCheckCircle, FaShoppingCart } from 'react-icons/fa'
+import { IoShieldCheckmark } from "react-icons/io5";
+import { useCart } from '../../context/CartContext'
 
 const dummyComments = [
   { name: "Aarav Sharma", rating: 5, date: "July 10, 2026", text: "Absolutely delicious! The spice level is just right, and the timur kick is amazing." },
@@ -24,6 +26,8 @@ export default function Product() {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [randomComments, setRandomComments] = useState([])
+  const [addedFeedback, setAddedFeedback] = useState(false)
+  const { addToCart } = useCart()
 
   // Pick 4 random comments on mount / id change
   useEffect(() => {
@@ -72,12 +76,12 @@ export default function Product() {
       <div className='mainDiv px-4'>
 
         {/* ── Breadcrumbs ── */}
-        <div className='flex items-center gap-2 text-xs text-gray-400 mb-10 uppercase font-semibold tracking-wider'>
-          <Link to="/" className='hover:text-(--orange) transition-colors'>Home</Link>
-          <span>/</span>
-          <Link to="/products" className='hover:text-(--orange) transition-colors'>Products</Link>
-          <span>/</span>
-          <span className='text-gray-600'>{product.name}</span>
+        <div className='flex items-center gap-2 font-light 2xl:font-semibold text-gray-400 mb-10 uppercase tracking-wider'>
+          <Link to="/" className='hover:text-(--orange) transition-colors text-xs!'>Home</Link>
+          <span className='text-xs!'>/</span>
+          <Link to="/products" className='hover:text-(--orange) transition-colors text-xs!'>Products</Link>
+          <span className='text-xs!'>/</span>
+          <span className='text-gray-600 text-xs!'>{product.name}</span>
         </div>
 
         {/* ══════════════════════════════════════════════
@@ -88,14 +92,19 @@ export default function Product() {
           {/* ── Left: Image gallery ── */}
           <div className='lg:col-span-5 flex flex-col gap-5'>
             {/* Main active image */}
-            <div className='bg-gradient-to-br from-amber-50/50 to-orange-50/30 rounded-3xl p-8 flex items-center justify-center relative overflow-hidden border border-(--orange)/10 min-h-[320px] md:min-h-[420px] shadow-sm'>
+            <div className={`bg-linear-to-br 
+            ${product.type === 'veg'    
+                ? 'from-(--light_green)/10 to-(--green)/20'
+                : 'from-(--light_orange)/10 to-(--orange)/20'
+            }
+            rounded-3xl p-8 flex items-center justify-center relative overflow-hidden border border-(--orange)/10 min-h-[320px] md:min-h-[420px] shadow-sm`}>
               <img
                 src={images[activeImageIndex] || images[0]}
                 alt={product.name}
                 className='h-64 md:h-80 w-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500'
               />
               {/* Type badge */}
-              <span className={`absolute top-5 left-5 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest border backdrop-blur-md ${
+              <span className={`absolute top-5 left-5 text-[10px] font-semibold px-3 py-1.5 rounded-full uppercase tracking-widest border backdrop-blur-md ${
                 product.type === 'veg'
                   ? 'bg-(--green)/10 border-(--green)/20 text-(--green)'
                   : 'bg-red-500/10 border-red-500/20 text-red-500'
@@ -133,7 +142,11 @@ export default function Product() {
             <div className='space-y-5'>
               {/* Category + rating */}
               <div className='flex items-center gap-3 flex-wrap'>
-                <span className='text-xs font-bold text-(--orange) tracking-widest uppercase bg-(--orange)/5 px-3 py-1.5 rounded-full border border-(--orange)/10'>
+                <span className={`text-xs font-bold tracking-widest uppercase px-3 py-1.5 rounded-full
+                    ${product.type === 'veg'
+                    ? 'bg-(--green)/10 border-(--green)/20 text-(--green)'
+                    : 'bg-red-500/10 border-red-500/20 text-red-500'
+                }`}>
                   {product.category}
                 </span>
                 <div className='flex items-center gap-1.5 bg-amber-500/5 border border-amber-500/10 text-amber-600 px-3 py-1 rounded-full'>
@@ -165,7 +178,7 @@ export default function Product() {
 
               {/* Ingredients */}
               <div className='space-y-2'>
-                <h3 className='text-xs font-black text-(--dark_orange) uppercase tracking-widest'>Ingredients</h3>
+                <h3 className='text-xs font-bold text-(--dark_orange) uppercase tracking-widest'>Ingredients</h3>
                 <div className='flex flex-wrap gap-2'>
                   {product.ingredients.map((ing, idx) => (
                     <span key={idx} className='bg-white border border-gray-100 text-gray-600 text-xs px-3 py-1.5 rounded-xl font-medium shadow-sm hover:border-(--orange)/20 transition-colors'>
@@ -180,11 +193,11 @@ export default function Product() {
             <div className='space-y-5 pt-5 border-t border-gray-100'>
               <div className='flex items-baseline justify-between'>
                 <div>
-                  <p className='text-xs text-gray-400 font-semibold uppercase'>Price</p>
-                  <p className='text-3xl font-black text-(--orange)'>Rs. {product.price}</p>
+                  <p className='text-xs text-gray-400 uppercase'>Price</p>
+                  <p className='text-3xl font-bold text-(--orange)'>Rs. {product.price}</p>
                 </div>
                 <div className='text-right'>
-                  <p className='text-xs text-gray-400 font-semibold uppercase'>Net Weight</p>
+                  <p className='text-xs text-gray-400 uppercase'>Net Weight</p>
                   <p className='text-base font-bold text-(--dark_orange) bg-gray-100 px-3 py-1.5 rounded-lg'>{product.size}{product.unit}</p>
                 </div>
               </div>
@@ -201,9 +214,16 @@ export default function Product() {
                   </button>
                 </div>
 
-                <button className='flex-grow bg-(--orange) hover:bg-(--dark_orange) text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer'>
+                <button 
+                  onClick={() => {
+                    addToCart(product, quantity)
+                    setAddedFeedback(true)
+                    setTimeout(() => setAddedFeedback(false), 1500)
+                  }}
+                  className='grow bg-(--orange) hover:bg-(--dark_orange) text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer'
+                >
                   <FaShoppingCart className='size-4' />
-                  <span>Add to Cart — Rs. {product.price * quantity}</span>
+                  <span>{addedFeedback ? 'Added ✓' : `Add to Cart — Rs. ${product.price * quantity}`}</span>
                 </button>
               </div>
             </div>
@@ -214,9 +234,9 @@ export default function Product() {
             REVIEWS SECTION
         ══════════════════════════════════════════════ */}
         <div className='bg-white border border-(--orange)/10 rounded-3xl p-8 md:p-12 mb-20 shadow-sm'>
-          <h2 className='text-2xl md:text-3xl font-black text-(--dark_orange) uppercase tracking-wide mb-8 flex items-center gap-3'>
+          <h2 className='text-2xl md:text-3xl font-black text-(--dark_orange) uppercase tracking-wide mb-8 flex items-start gap-3'>
             Customer Reviews
-            <span className='text-sm bg-(--orange)/10 text-(--orange) px-3 py-1 rounded-full font-bold'>{product.reviews}</span>
+            <span className='text-xs bg-(--orange)/10 text-(--orange) px-3 py-1 rounded-full font-normal'>{product.reviews} reviews</span>
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -225,7 +245,13 @@ export default function Product() {
                 <div className='flex justify-between items-start'>
                   <div>
                     <h4 className='font-bold text-(--dark_orange)'>{comment.name}</h4>
-                    <p className='text-xs text-gray-400'>{comment.date}</p>
+                    <div className='flex items-center gap-1'>
+                        <div className='flex items-center gap-2 text-xs text-(--green) font-bold'>
+                            <IoShieldCheckmark className='size-3' />
+                            <span className='text-xs'>Verified Purchase,</span>
+                        </div>
+                        <p className='text-xs text-gray-400'>{comment.date}</p>
+                    </div>
                   </div>
                   <div className='flex items-center gap-0.5'>
                     {[...Array(5)].map((_, i) => (
@@ -233,11 +259,7 @@ export default function Product() {
                     ))}
                   </div>
                 </div>
-                <p className='text-gray-500 text-sm italic leading-relaxed'>"{comment.text}"</p>
-                <div className='flex items-center gap-2 text-xs text-(--green) font-bold'>
-                  <FaCheckCircle className='size-3' />
-                  <span>Verified Purchase</span>
-                </div>
+                <p className='text-gray-500 text-sm italic leading-relaxed font-serif'>"{comment.text}"</p>
               </div>
             ))}
           </div>
