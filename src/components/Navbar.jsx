@@ -103,7 +103,7 @@ export default function Navbar() {
                     </div>
                   }
                   <div className='flex items-center gap-8'>
-                    {isMobile && (
+                    {isMobile && location === '/' && (
                       <span 
                         onClick={() => setIsOpen(!isOpen)}
                         className={`text-sm font-semibold transition-all cursor-pointer select-none uppercase tracking-wider
