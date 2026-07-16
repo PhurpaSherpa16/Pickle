@@ -86,7 +86,7 @@ export default function Navbar() {
                       <img src="/largelogo.png" alt="logo" className='size-8 object-cover object-center'/>
                       <p className='uppercase font-black text-(--orange)'>Pickle</p>
                   </Link>
-                  {!isMobile && location === '/' &&
+                  {!isMobile && location.pathname === '/' &&
                     <div className='flex items-center gap-16'>
                         {
                             MenuList.map((item, index)=>(
@@ -103,7 +103,7 @@ export default function Navbar() {
                     </div>
                   }
                   <div className='flex items-center gap-8'>
-                    {isMobile && location === '/' && (
+                    {isMobile && location.pathname === '/' && (
                       <span 
                         onClick={() => setIsOpen(!isOpen)}
                         className={`text-sm font-semibold transition-all cursor-pointer select-none uppercase tracking-wider
