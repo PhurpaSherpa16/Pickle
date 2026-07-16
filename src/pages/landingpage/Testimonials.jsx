@@ -12,6 +12,7 @@ const testimonialsData = [
     type: "video",
     name: "Ankur Joshi",
     location: "Kathmandu",
+    avatar: "/avatar1.png",
     rating: 4,
     description:
       "The first bite took me straight back to my grandmother's kitchen in Pokhara. It’s not just pickle; it’s memory. The balance of spice and tang is perfect—no artificial aftertaste, no unnecessary oil. You can taste the care in every crunch.",
@@ -22,6 +23,7 @@ const testimonialsData = [
     type: "video",
     name: "Priya Shrestha",
     location: "Lalitpur",
+    avatar: "/avatar2.png",
     rating: 5,
     description:
       "I've tried many homemade pickles, but this one stands out. The freshness, authentic Nepali spices, and perfect level of heat make it a staple in my home. It pairs beautifully with dal bhat and even simple rice.",
@@ -32,6 +34,7 @@ const testimonialsData = [
     type: "video",
     name: "Ramesh Gurung",
     location: "Pokhara",
+    avatar: "/avatar3.png",
     rating: 5,
     description:
       "The Chicken Achar exceeded my expectations. Every piece is flavorful, juicy, and coated with perfectly roasted spices. It reminds me of the achar my mother used to prepare during Dashain.",
@@ -41,6 +44,7 @@ const testimonialsData = [
     file: "https://ik.imagekit.io/k05httq0p/Pickle/video1.mp4",
     type: "video",
     name: "Sujata Rai",
+    avatar: "/avatar1.png",
     location: "Dharan",
     rating: 4,
     description:
@@ -51,6 +55,7 @@ const testimonialsData = [
     file: "https://ik.imagekit.io/k05httq0p/Pickle/video3.mp4",
     type: "video",
     name: "Bikash Tamang",
+    avatar: "/avatar2.png",
     location: "Bhaktapur",
     rating: 5,
     description:
@@ -61,6 +66,7 @@ const testimonialsData = [
     file: "https://ik.imagekit.io/k05httq0p/Pickle/video2.mp4",
     type: "video",
     name: "Hem Gurnng",
+    avatar: "/avatar3.png",
     location: "Butwal",
     rating: 5,
     description:
@@ -71,6 +77,7 @@ const testimonialsData = [
     file: "https://ik.imagekit.io/k05httq0p/Pickle/video5.mp4",
     type: "video",
     name: "Sandeep Adhikari",
+    avatar: "/avatar1.png",
     location: "Chitwan",
     rating: 4,
     description:
@@ -81,6 +88,7 @@ const testimonialsData = [
     file: "https://ik.imagekit.io/k05httq0p/Pickle/video1.mp4",
     type: "video",
     name: "Mina Lama",
+    avatar: "/avatar2.png",
     location: "Hetauda",
     rating: 5,
     description:
@@ -90,6 +98,7 @@ const testimonialsData = [
     id: "09",
     file: "/image1.jpeg",
     type: "image",
+    avatar: "/avatar3.png",
     name: "Roshan KC",
     location: "Biratnagar",
     rating: 4,
@@ -101,6 +110,7 @@ const testimonialsData = [
     file: "https://ik.imagekit.io/k05httq0p/Pickle/video4.mp4",
     type: "video",
     name: "Sabina Thapa",
+    avatar: "/avatar1.png",
     location: "Nepalgunj",
     rating: 5,
     description:
@@ -127,7 +137,7 @@ export default function Testimonials() {
 
   return (
     <div className={`min-h-screen w-screen relative z-10 transition-colors duration-500`}>
-        <div className='mainDiv py-8 md:py-16 space-y-16 md:space-y-32 relative z-40'>
+        <div className='mainDiv py-8 md:py-8 pt-16 space-y-16 md:space-y-32 relative z-40'>
             <div className='space-y-4 flex flex-col items-center justify-center'>
                 <h1 className={`font-medium transition-colors duration-500 text-(--dark_orange)
                     text-[clamp(2rem,4vw,3rem)]! 2xl:text-[clamp(2rem,5vw,4rem)]! text-center`}>
@@ -149,7 +159,7 @@ export default function Testimonials() {
                         handlePrev={handlePrev} 
                         isMobile={isMobile}
                     />
-                    <div className='flex items-center justify-center gap-16 md:gap-120 2xl:gap-160 relative top-8 md:-top-4 2xl:top-10 z-40'>
+                    <div className='flex items-center justify-center gap-36 md:gap-120 2xl:gap-160 relative top-8 md:-top-4 2xl:top-10 z-40'>
                         <motion.button whileHover={{scale:0.9}} whileTap={{scale: 1}} onClick={handlePrev}
                             className={`p-1 flex items-center justify-center rounded-full bg-(--dark_orange) 
                             transition-colors duration-500 text-(--offWhite) cursor-pointer`}>
@@ -169,25 +179,11 @@ export default function Testimonials() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
-                    className='flex flex-col items-center gap-8 mt-8'
-                >
+                    className='flex min-h-56 flex-col items-center gap-8 mt-8'>
                     <div className='flex items-center gap-4'>
-                        {activeTestimonial.type === 'video' ? (
-                          <video 
-                              src={activeTestimonial.file} 
-                              className='size-12 rounded-full object-cover filter grayscale-100'
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                          />
-                        ) : (
-                          <img 
-                              src={activeTestimonial.file} 
-                              alt={activeTestimonial.name} 
-                              className='size-12 rounded-full object-cover filter grayscale-100'
-                          />
-                        )}
+                        <img src={activeTestimonial.avatar} alt={activeTestimonial.name} 
+                            className='size-12 rounded-full object-cover filter grayscale-80'
+                        />
                         <div className='flex flex-col space-y-2'>
                             <div>
                                 <h3 className='font-medium text-(--dark_orange) text-sm'>{activeTestimonial.name}</h3>
@@ -341,7 +337,7 @@ const TestimonialCarousel = ({ activeIndex, setActiveIndex, handleNext, handlePr
   }
 
   return (
-    <div className='relative overflow-visible pt-24 pb-16 md:pt-0 lg:pt-16 md:py-12'>
+    <div className='relative overflow-visible pt-16 pb-16 md:pt-0 lg:pt-8 md:py-12'>
       <div className='flex items-center justify-center relative h-40 md:h-120 2xl:h-140 w-full max-w-5xl 2xl:max-w-7xl mx-auto overflow-visible'>
         {testimonialsData.map((testimonial, idx) => {
           let offset = idx - activeIndex
