@@ -158,7 +158,7 @@ export default function Products() {
                 </div>
 
             </div>
-            <div className='mainDiv flex items-center justify-center text-(--orange) pb-16'>
+            <div className='mainDiv flex items-center justify-center text-(--orange) py-16 md:pt-0 md:pb-16'>
                 <Link to='/products' className='hover:scale-102 transition-all duration-300 hover:underline'>View All Products</Link>
             </div>
         </div>
