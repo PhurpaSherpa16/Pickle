@@ -191,9 +191,9 @@ export default function Navbar() {
 }
 
 const MenuList = [
-    {name:"Product",path:"/products"},
+    {name:"Products",path:"/products"},
     {name:"About",path:"/about"},
-    {name:"Contact",path:"/contact"},
+    {name:"top collection",path:"#topCollection"},
 ]
 
 const socialLinks = [

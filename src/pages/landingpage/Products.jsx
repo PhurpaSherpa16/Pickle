@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import CTAButton from '../../components/CTAButton';
 import { productsData } from '../../data/products';
 import { Link } from 'react-router-dom';
+import CartButton from '../../components/CartButton';
 
 // Dynamic theme mapper based on product categories and names
 const getProductTheme = (product) => {
@@ -55,7 +56,7 @@ export default function Products() {
     }
 
     return (
-        <div className={`min-h-screen w-screen relative z-10 transition-colors duration-500 ${themeBg}`}>
+        <div id='topCollection' className={`min-h-screen w-screen relative z-10 transition-colors duration-500 ${themeBg}`}>
             <div className='pt-16 md:py-32 space-y-8 md:space-y-12 relative z-40'>
                 <div className='mainDiv space-y-4 flex flex-col items-center justify-center'>
                     <h1 className={`font-medium transition-colors duration-500 
@@ -74,7 +75,6 @@ export default function Products() {
                             {[prevIndex, activeIndex, nextIndex].map((idx, positionIdx) => {
                                 const product = productList[idx]
                                 const active = idx === activeIndex
-                                
                                 return (
                                     <motion.div
                                         key={product.id} 
@@ -144,14 +144,17 @@ export default function Products() {
                                     Rs. {activeProduct.price} / {activeProduct.size}{activeProduct.unit}
                                 </p>
                             </div>
-                            <div className='space-y-4 w-full md:w-fit flex items-start md:items-end'>
-                                <CTAButton 
-                                    link={`/product/${activeProduct.id}`}
-                                    label="View This Product" 
-                                    className={`${themeBgBtn}`}
-                                    span={`${themeTextHoverBtn}`} 
-                                    className3={`${themeTextArrowBtn}`}
-                                />
+                            <div className='space-y-4 h-fit w-full md:w-fit flex items-start justify-start'>
+                                <div className='flex items-center justify-center h-fit w-fit gap-4'>
+                                    <CTAButton 
+                                        link={`/product/${activeProduct.id}`}
+                                        label="View This Product" 
+                                        className={`${themeBgBtn}`}
+                                        span={`${themeTextHoverBtn}`} 
+                                        className3={`${themeTextArrowBtn}`}
+                                    />
+                                    <CartButton product={activeProduct} className={themeBgBtn} size={'size-6'}/>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

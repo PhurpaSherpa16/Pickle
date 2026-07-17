@@ -136,10 +136,10 @@ export default function Checkout() {
                 </div>
 
                 <div className='flex flex-col gap-3 pt-2'>
-                  <button className='w-full bg-(--orange) hover:bg-(--dark_orange) text-white! font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2'>
-                    <span>Order Now</span>
+                  <Link to="/order" className='w-full bg-(--orange) hover:bg-(--dark_orange) text-white! font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2'>
+                    <span>Place Order Now</span>
                     <HiTruck className='size-5' />
-                  </button>
+                  </Link>
                   <Link
                     to="/products"
                     className='w-full text-center py-3 flex items-center justify-center gap-2 rounded-xl border border-(--orange)/20 text-(--orange)! text-sm font-semibold hover:bg-(--orange)/5 transition-colors'

@@ -50,7 +50,7 @@ export default function Footer() {
                             <IoMdMail className='text-(--white)/60 group-hover:text-(--white)
                             group-hover:-translate-x-0.5 transition-all duration-300 ease-in-out'/> 
                             <span className='group-hover:translate-x-1 transition-all duration-200 ease-in-out'>
-                                sales.pickle@gmail.com
+                                sales.pickle@pickle.com
                             </span>
                         </a>
                         <p className='group flex items-center gap-2 text-(--white)/60 hover:text-(--white)! 
@@ -107,9 +107,9 @@ export default function Footer() {
                     </div>
                     {/* bottom */}
                     <div className='flex flex-col md:flex-row md:items-center justify-between'>
-                        <Link to='/' className='text-(--white) hover:text-(--white)!
+                        <Link to='/about' className='text-(--white) hover:text-(--white)!
                         hover:-translate-y-1 transition-all duration-200 ease-in-out hidden md:block'>Our Story</Link>
-                        <Link to='/' className='text-(--white) hover:text-(--white)!
+                        <Link to='#gallery' className='text-(--white) hover:text-(--white)!
                         hover:-translate-y-1 transition-all duration-200 ease-in-out hidden md:block'>Gallery</Link>
                         <CTAButton label='Order Now' className='bg-(--white) border-(--white)'
                         span='group-hover:text-(--white) text-(--orange)' className3='text-(--white)' className2='bg-(--orange)'/>
@@ -122,11 +122,11 @@ export default function Footer() {
                     <p className='text-xs font-light text-(--white)/60 hover:text-white! transition-colors duration-300'>© 2025 Achar House</p>
                     <span className='text-(--white)/60 md:block hidden'>/</span>
                     <div className='flex items-start md:items-center gap-4 flex-col md:flex-row'>
-                        <Link className='hover:-translate-y-1 transition-all duration-300 text-xs 2xl:text-sm font-light
+                        <Link to="/policies#all-rights-reserved" className='hover:-translate-y-1 transition-all duration-300 text-xs 2xl:text-sm font-light
                         text-(--white)/60 hover:text-white!'>All rights reserved</Link> <span className='text-(--white)/60 md:block hidden'>/</span>
-                        <Link className='hover:-translate-y-1 transition-all duration-300 text-xs 2xl:text-sm font-light
+                        <Link to="/policies#privacy-policy" className='hover:-translate-y-1 transition-all duration-300 text-xs 2xl:text-sm font-light
                         text-(--white)/60 hover:text-white!'>Privacy Policy</Link> <span className='text-(--white)/60 md:block hidden'>/</span>
-                        <Link className='hover:-translate-y-1 transition-all duration-300 text-xs  2xl:text-sm font-light
+                        <Link to="/policies#terms-and-conditions" className='hover:-translate-y-1 transition-all duration-300 text-xs  2xl:text-sm font-light
                         text-(--white)/60 hover:text-white!'>Terms & Conditions</Link>
                     </div>
                 </div>
@@ -164,21 +164,21 @@ export const socialLinks = [
 
 const Menu = [
     {label:'Home', link:'/'},
-    {label:'Products', link:'/'},
-    {label:'Contact', link:'/'},
-    {label:'About', link:'/'},
+    {label:'Products', link:'/products'},
+    {label:'About', link:'/about'},
+    {label:'Top Collection', link:'#topCollection'},
 ]
 
 const forDistribution=[
-    {label:'Kathmandu Valley', link:'/'},
-    {label:'Nationwide Delivery', link:'/'},
-    {label:'International Shipping', link:'/'},
-    {label:'Bulk Orders', link:'/'},
+    {label:'Kathmandu Valley', link:`/inquiry/${'kathmandu'}`},
+    {label:'Nationwide Delivery', link:`/inquiry/${'national'}`},
+    {label:'International Shipping', link:`/inquiry/${'international'}`},
+    {label:'Bulk Orders', link:`/inquiry/${'bulk_order'}`},
 ]
 
 const Support=[
-    {label:'Shipping Policy', link:'/'},
-    {label:'Returns & Refunds', link:'/'},
-    {label:'Contact Support', link:'/'},
-    {label:'FAQs', link:'/'},
+    {label:'Shipping Policy', link:'/shipping-policies'},
+    {label:'Returns & Refunds', link:'/return-refunds'},
+    {label:'Contact Support', link:'/contact-support'},
+    {label:'FAQs', link:'/faqs'},
 ]

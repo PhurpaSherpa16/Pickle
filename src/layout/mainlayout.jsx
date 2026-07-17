@@ -11,6 +11,16 @@ export default function MainLayout(){
         window.scrollTo(0, 0)
     }, [location])
 
+    useEffect(()=>{
+        if(location.hash){
+        const element = document.querySelector(location.hash)
+        if(element){
+            element.scrollIntoView({behavior:'smooth',block:'start'})
+        }
+        }
+
+    },[location])
+
     return(
         <div className='min-h-screen relative overflow-hidden w-screen'>
             <Navbar/>

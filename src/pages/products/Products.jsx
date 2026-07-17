@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { Link, useLocation } from 'react-router-dom';
 import { FaCartShopping } from 'react-icons/fa6';
 import { useCart } from '../../context/CartContext';
+import CartButton from '../../components/CartButton';
 
 export default function Products() {
   const location = useLocation();
@@ -74,9 +75,6 @@ export default function Products() {
 }
 
 export const ProductCard = ({src, name, category, price, weight, rating, type, flavor, pid, product}) => {
-    const { addToCart } = useCart()
-    const [addedFeedback, setAddedFeedback] = useState(false)
-    const quantity = 1
     
     return(
         <div className='group relative bg-(--white) border border-(--orange)/10 rounded-2xl flex p-4 space-y-2
@@ -146,19 +144,7 @@ export const ProductCard = ({src, name, category, price, weight, rating, type, f
                             <span>View Product</span>
                             <FaArrowRight className='-rotate-45'/>
                         </Link>
-                        <button onClick={() => {
-                            addToCart(product, 1)
-                            setAddedFeedback(true)
-                            setTimeout(() => setAddedFeedback(false), 1500)
-                        }} 
-                        className={`w-fit ${addedFeedback ? 'bg-(--light_green) hover:bg-(--light_green)' : 'bg-(--orange) hover:bg-(--dark_orange) ' } cursor-pointer text-white!
-                        p-2.5 rounded-full transition-colors duration-300 text-sm flex items-center justify-center 
-                        gap-2 group/btn shadow-md hover:shadow-lg`}>
-                            {addedFeedback ? 
-                            <span> <FaCheck className='size-5 pointer-events-none text-green-600'/></span> :
-                            <FaCartShopping className='size-5 pointer-events-none'/>
-                            }
-                        </button>
+                        <CartButton product={product}/>
                     </div>
                 </div>
             </div>
