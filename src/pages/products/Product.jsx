@@ -73,7 +73,7 @@ export default function Product() {
 
   return (
     <div className='min-h-screen w-screen bg-(--offWhite)/30 pt-28 pb-24'>
-      <div className='mainDiv px-4'>
+      <div className='mainDiv'>
 
         {/* ── Breadcrumbs ── */}
         <div className='flex items-center gap-2 font-light 2xl:font-semibold text-gray-400 mb-10 uppercase tracking-wider'>
