@@ -23,10 +23,10 @@ A modern, premium e-commerce website for an authentic Nepali pickle brand. Built
 ## 🛠️ Tech Stack
 
 - React
-- TypeScript
 - Tailwind CSS
 - Framer Motion
 - Vite
+- Figma
 
 
 ---
